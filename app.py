@@ -21,6 +21,7 @@ def toggle_led():
 
 @app.route('/get_status', methods=['GET'])
 def get_status():
+    global led_status
     return led_status
 
 if __name__=='__main__':
