@@ -57,7 +57,7 @@
         let bulbImage = document.getElementById('bulbImage');
         let ledSwitch = document.getElementById('ledSwitch');
 
-        if (status === "true") {
+        if (status === "ON") {
             bulbImage.src = "{{ url_for('static', filename='bulb_on.png') }}";
             bulbImage.alt = "Bombilla encendida";
             ledSwitch.checked = true;
