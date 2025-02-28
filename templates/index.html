@@ -3,17 +3,17 @@
 {% block content %}
 
 <div class="container mt-4 text-center">
-    <h1>Control Manual</h1>
+    <h1 class="my-5">Control Manual</h1>
 
-    <div class="d-flex flex-column align-items-center">
+    <div class="d-flex flex-column align-items-center my-5">
         <!-- Imagen de la bombilla -->
         <img id="bulbImage" src="{{ url_for('static', filename='bulb_off.png') }}" 
-             alt="Bombilla apagada" width="600" style="max-width: 100%; height: auto;">
+             alt="Bombilla apagada" width="600" style="width: 500px; height: auto;">
         
         <!-- Switch deslizante centrado debajo de la bombilla -->
-        <div class="d-flex align-items-center mt-3">
+        <div class="d-flex align-items-center my-5">
             <span class="fs-4 me-3">Apagar</span>
-            <div class="form-check form-switch">
+            <div class="form-check form-switch my-5">
                 <input class="form-check-input custom-switch" type="checkbox" id="ledSwitch" onchange="toggleLED()">
             </div>
             <span class="fs-4 ms-3">Encender</span>
