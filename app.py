@@ -21,7 +21,7 @@ def toggle_led():
 
 @app.route('/get_status', methods=['GET'])
 def get_status():
-    return jsonify(status=led_status)
+    return led_status
 
 if __name__=='__main__':
     app.run(debug=True)
