@@ -1,0 +1,14 @@
+.navbar-brand {
+    color: #FFD700 !important; /* Amarillo brillante */
+    font-weight: bold;
+    text-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8); /* Efecto de luz */
+}
+
+.navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.918) !important; /* Blanco tenue para todos */
+    transition: color 0.3s ease-in-out; /* Transición suave */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #FFD700 !important; /* Amarillo brillante al pasar el mouse */
+}

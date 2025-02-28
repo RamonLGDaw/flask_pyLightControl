@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4 text-center">
+    <h1>Control Manual</h1>
+
+    <div class="d-flex flex-column align-items-center">
+        <!-- Imagen de la bombilla -->
+        <img id="bulbImage" src="{{ url_for('static', filename='bulb_off.png') }}" 
+             alt="Bombilla apagada" width="600" style="max-width: 100%; height: auto;">
+        
+        <!-- Switch deslizante centrado debajo de la bombilla -->
+        <div class="d-flex align-items-center mt-3">
+            <span class="fs-4 me-3">Apagar</span>
+            <div class="form-check form-switch">
+                <input class="form-check-input custom-switch" type="checkbox" id="ledSwitch" onchange="toggleLED()">
+            </div>
+            <span class="fs-4 ms-3">Encender</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Personalizar colores del switch */
+    .custom-switch {
+        width: 50px;
+        height: 25px;
+        background-color: #6c757d; /* Gris oscuro cuando está apagado */
+        border-radius: 20px;
+        position: relative;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .custom-switch:checked {
+        background-color: #ffc107 !important; /* Amarillo cuando está encendido */
+    }
+
+    /* Centrar completamente el switch */
+    .form-switch {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<script>
+    function toggleLED() {
+        fetch('/toggle_led', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+            updateBulbImage(data.status);
+        });
+    }
+
+    function updateBulbImage(status) {
+        let bulbImage = document.getElementById('bulbImage');
+        let ledSwitch = document.getElementById('ledSwitch');
+
+        if (status === "ON") {
+            bulbImage.src = "{{ url_for('static', filename='bulb_on.png') }}";
+            bulbImage.alt = "Bombilla encendida";
+            ledSwitch.checked = true;
+        } else {
+            bulbImage.src = "{{ url_for('static', filename='bulb_off.png') }}";
+            bulbImage.alt = "Bombilla apagada";
+            ledSwitch.checked = false;
+        }
+    }
+
+    function updateSwitchState() {
+        fetch('/get_status')
+        .then(response => response.json())
+        .then(data => {
+            updateBulbImage(data.status);
+        });
+    }
+
+    // Cargar estado inicial al abrir la página
+    updateSwitchState();
+</script>
+
+{% endblock %}
