@@ -92,7 +92,7 @@ def cancel_program():
     programmed_start_time = None
     programmed_end_time = None
 
-    # Redirigir a la página de programación con las horas eliminadas
+    # Redirigir a la página de programación con las horas eliminadas.
     return redirect(url_for('programado'))
 
 @app.route('/toggle_led', methods=['POST'])
