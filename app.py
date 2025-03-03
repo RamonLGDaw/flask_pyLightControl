@@ -77,7 +77,7 @@ def set_program():
     start_time = request.form['start_time']
     end_time = request.form['end_time']
 
-    # Convertir las horas a objetos `time` para comparación
+    # Convertir las horas a objetos `time` para comparación.
     programmed_start_time = datetime.strptime(start_time, "%H:%M").time()
     programmed_end_time = datetime.strptime(end_time, "%H:%M").time()
 
