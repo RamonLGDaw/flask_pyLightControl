@@ -45,8 +45,11 @@ def check_led_schedule():
     global led_status
     while True:
         # Si hay un horario programado, comprobar si debe encenderse el LED
+        print('ha entrado en le while!!')
+        print(f'contenido de variable de tiempo: {programmed_start_time} yyyy {programmed_end_time}')
         if programmed_start_time and programmed_end_time:
             current_time = datetime.now().time()
+            print(f'Contenido de current time: {current_time}')
             if programmed_start_time <= current_time <= programmed_end_time:
                 if led_status == "OFF":
                     led_status = "ON"
@@ -55,7 +58,7 @@ def check_led_schedule():
                 if led_status == "ON":
                     led_status = "OFF"
                     print("LED APAGADO (fuera del horario programado)")
-        time_lib.sleep(60)  # Verificar cada minuto
+        time_lib.sleep(10)  # Verificar cada minuto
 
 @app.route('/')
 def home():
