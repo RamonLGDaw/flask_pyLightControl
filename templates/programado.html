@@ -33,6 +33,10 @@
     <div class="mt-4">
         <h3>Hora actual: <span id="current_time"></span></h3>
     </div>
+
+    <div class="mt-4">
+        <h4>Estado del LED: <span id="estado_led"></span></h4>
+    </div>
 </div>
 
 
@@ -42,5 +46,26 @@
         let currentTime = new Date().toLocaleTimeString();
         document.getElementById('current_time').textContent = currentTime;
     }, 1000);
+
+    mostrar_led_status = 'OFF';  // Estado inicial
+
+    // Función para obtener y mostrar el estado del LED
+    function comprobar_estado() {
+        fetch('/get_status')
+            .then(response => response.text())  // Utilizamos .text() en lugar de .json()
+            .then(data => {
+                mostrar_led_status = data;  // Aquí 'data' es un string
+                document.getElementById('estado_led').textContent = mostrar_led_status;  // Actualiza el contenido en el HTML
+            });
+    }
+
+    // Llamar a comprobar_estado() inicialmente cuando se carga la página
+    document.addEventListener('DOMContentLoaded', function () {
+        comprobar_estado();  // Llama a la función para cargar el estado inicial
+    });
+
+    // Actualizar el estado cada cierto intervalo de tiempo
+    setInterval(comprobar_estado, 5000);  // Por ejemplo, cada 5 segundos
 </script>
+
 {% endblock %}
