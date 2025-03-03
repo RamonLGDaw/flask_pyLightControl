@@ -1,9 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h2 class="text-center">Programar encendido del LED</h2>
 <div class="container">
-    <h1 class="my-5">Próximamente... &#128526;</h1>
-    
+    <form method="POST" action="/set_program" class="mt-4">
+        <div class="mb-3">
+            <label for="start_time" class="form-label">Hora de inicio:</label>
+            <input type="time" id="start_time" name="start_time" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="end_time" class="form-label">Hora de finalización:</label>
+            <input type="time" id="end_time" name="end_time" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Programar</button>
+    </form>
+
+    {% if start_time and end_time %}
+    <div class="mt-4">
+        <h3>Programación actual:</h3>
+        <p>Hora de inicio: {{ start_time.strftime('%H:%M') }}</p>
+        <p>Hora de finalización: {{ end_time.strftime('%H:%M') }}</p>
+
+        <!-- Botón para cancelar la programación -->
+        <form method="POST" action="/cancel_program" class="mt-3">
+            <button type="submit" class="btn btn-danger">Cancelar programación</button>
+        </form>
+    </div>
+    {% endif %}
+
+    <div class="mt-4">
+        <h3>Hora actual: <span id="current_time"></span></h3>
+    </div>
 </div>
 
+
+<script>
+    // Mostrar la hora actual en tiempo real
+    setInterval(() => {
+        let currentTime = new Date().toLocaleTimeString();
+        document.getElementById('current_time').textContent = currentTime;
+    }, 1000);
+</script>
 {% endblock %}
